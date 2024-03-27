@@ -1,4 +1,4 @@
-# BeesBusy Test Back
+# BeesBusy Test
  
 Test app in Django/React for managing users.
 ## Stack
