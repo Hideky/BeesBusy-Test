@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  backend:
+    build:
+      context: backend/
+      dockerfile: Dockerfile
+    command: >
+      sh -c "python manage.py migrate && 
+             python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ./backend:/app
+    ports:
+      - "8000:8000"
+    stdin_open: true
+    container_name: beesbusy-test-backend
+
+  frontend:
+    build:
+      context: frontend/
+      dockerfile: Dockerfile
+    command: "npm run dev"
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+    stdin_open: true
+    depends_on:
+      - backend
+    container_name: beesbusy-test-frontend
